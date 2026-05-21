@@ -10,14 +10,14 @@ public:
     using index_type = typename MatrixStorage<T, DefaultValue>::index_type;
     using value_type = typename MatrixStorage<T, DefaultValue>::value_type;
 
-    MatrixRow<T, DefaultValue> operator[](index_type row) & {
-        return MatrixRow<T, DefaultValue>(m_storage, row);
-    }
+    MatrixRow<T, DefaultValue> operator[](index_type row) &;
 
-    std::size_t size() const { return m_storage.size(); }
+    std::size_t size() const;
 
 private:
     MatrixStorage<T, DefaultValue> m_storage;
 };
+
+#include "matrix.tpp"
 
 #endif  // MATRIX_H
