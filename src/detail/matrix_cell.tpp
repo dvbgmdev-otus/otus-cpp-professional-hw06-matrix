@@ -6,7 +6,7 @@
 #endif  // MATRIX_CELL_H
 
 template <typename T, T DefaultValue>
-MatrixCell<T, DefaultValue>::MatrixCell(storage_type& storage, MatrixIndex row, MatrixIndex column)
+MatrixCell<T, DefaultValue>::MatrixCell(Storage& storage, MatrixIndex row, MatrixIndex column)
     : m_storage(storage), m_row(row), m_column(column) {}
 
 template <typename T, T DefaultValue>
