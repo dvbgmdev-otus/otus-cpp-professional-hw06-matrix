@@ -15,4 +15,14 @@ std::size_t Matrix<T, DefaultValue>::size() const {
     return m_storage.size();
 }
 
+template <typename T, T DefaultValue>
+auto Matrix<T, DefaultValue>::begin() const -> Iterator {
+    return m_storage.begin();
+}
+
+template <typename T, T DefaultValue>
+auto Matrix<T, DefaultValue>::end() const -> Iterator {
+    return m_storage.end();
+}
+
 #endif  // MATRIX_TPP

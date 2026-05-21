@@ -31,4 +31,14 @@ std::size_t MatrixStorage<T, DefaultValue>::size() const {
     return m_data.size();
 }
 
+template <typename T, T DefaultValue>
+auto MatrixStorage<T, DefaultValue>::begin() const -> Iterator {
+    return Iterator(m_data.cbegin());
+}
+
+template <typename T, T DefaultValue>
+auto MatrixStorage<T, DefaultValue>::end() const -> Iterator {
+    return Iterator(m_data.cend());
+}
+
 #endif  // MATRIX_STORAGE_TPP
