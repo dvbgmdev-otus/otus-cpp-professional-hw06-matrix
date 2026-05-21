@@ -10,8 +10,8 @@ MatrixRow<T, DefaultValue>::MatrixRow(Storage& storage, MatrixIndex row)
     : m_storage(storage), m_row(row) {}
 
 template <typename T, T DefaultValue>
-MatrixCell<T, DefaultValue> MatrixRow<T, DefaultValue>::operator[](MatrixIndex column) && {
-    return MatrixCell<T, DefaultValue>(m_storage, m_row, column);
+auto MatrixRow<T, DefaultValue>::operator[](MatrixIndex column) && -> Cell {
+    return Cell(m_storage, m_row, column);
 }
 
 #endif  // MATRIX_ROW_TPP

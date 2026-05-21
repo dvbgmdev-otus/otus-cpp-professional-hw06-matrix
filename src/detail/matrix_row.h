@@ -8,11 +8,12 @@ template <typename T, T DefaultValue>
 class MatrixRow {
 public:
     using Storage = MatrixStorage<T, DefaultValue>;
+    using Cell = MatrixCell<T, DefaultValue>;
 
     MatrixRow(Storage& storage, MatrixIndex row);
 
-    MatrixCell<T, DefaultValue> operator[](MatrixIndex column) &&;
-    MatrixCell<T, DefaultValue> operator[](MatrixIndex column) & = delete;
+    Cell operator[](MatrixIndex column) &&;
+    Cell operator[](MatrixIndex column) & = delete;
 
 private:
     Storage& m_storage;
