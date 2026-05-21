@@ -7,13 +7,12 @@ template <typename T, T DefaultValue>
 class MatrixCell {
 public:
     using storage_type = MatrixStorage<T, DefaultValue>;
-    using value_type = typename storage_type::value_type;
 
     MatrixCell(storage_type& storage, MatrixIndex row, MatrixIndex column);
 
-    MatrixCell& operator=(const value_type& value);
+    MatrixCell& operator=(const T& value);
 
-    operator value_type() const;
+    operator T() const;
 
 private:
     storage_type& m_storage;

@@ -8,16 +8,14 @@
 template <typename T, T DefaultValue>
 class MatrixStorage {
 public:
-    using value_type = T;
+    T get(MatrixIndex row, MatrixIndex column) const;
 
-    value_type get(MatrixIndex row, MatrixIndex column) const;
-
-    void set(MatrixIndex row, MatrixIndex column, const value_type& value);
+    void set(MatrixIndex row, MatrixIndex column, const T& value);
 
     std::size_t size() const;
 
 private:
-    std::map<MatrixPosition, value_type> m_data;
+    std::map<MatrixPosition, T> m_data;
 };
 
 #include "matrix_storage.tpp"

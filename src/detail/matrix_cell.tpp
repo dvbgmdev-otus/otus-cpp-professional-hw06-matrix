@@ -10,13 +10,13 @@ MatrixCell<T, DefaultValue>::MatrixCell(storage_type& storage, MatrixIndex row, 
     : m_storage(storage), m_row(row), m_column(column) {}
 
 template <typename T, T DefaultValue>
-MatrixCell<T, DefaultValue>& MatrixCell<T, DefaultValue>::operator=(const value_type& value) {
+MatrixCell<T, DefaultValue>& MatrixCell<T, DefaultValue>::operator=(const T& value) {
     m_storage.set(m_row, m_column, value);
     return *this;
 }
 
 template <typename T, T DefaultValue>
-MatrixCell<T, DefaultValue>::operator value_type() const {
+MatrixCell<T, DefaultValue>::operator T() const {
     return m_storage.get(m_row, m_column);
 }
 

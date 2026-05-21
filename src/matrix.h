@@ -7,8 +7,6 @@
 template <typename T, T DefaultValue>
 class Matrix {
 public:
-    using value_type = typename MatrixStorage<T, DefaultValue>::value_type;
-
     MatrixRow<T, DefaultValue> operator[](MatrixIndex row) &;
 
     std::size_t size() const;
