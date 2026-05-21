@@ -15,6 +15,7 @@ if(1) # PROJECT CONFIG BLOCK
 
     set(PROJECT_INCLUDE_DIR
         ${SRC_DIR}
+        ${SRC_DIR}/detail
     )
 
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
