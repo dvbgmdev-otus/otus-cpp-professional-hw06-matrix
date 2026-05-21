@@ -8,16 +8,15 @@ template <typename T, T DefaultValue>
 class MatrixRow {
 public:
     using storage_type = MatrixStorage<T, DefaultValue>;
-    using index_type = typename storage_type::index_type;
 
-    MatrixRow(storage_type& storage, index_type row);
+    MatrixRow(storage_type& storage, MatrixIndex row);
 
-    MatrixCell<T, DefaultValue> operator[](index_type column) &&;
-    MatrixCell<T, DefaultValue> operator[](index_type column) & = delete;
+    MatrixCell<T, DefaultValue> operator[](MatrixIndex column) &&;
+    MatrixCell<T, DefaultValue> operator[](MatrixIndex column) & = delete;
 
 private:
     storage_type& m_storage;
-    index_type m_row;
+    MatrixIndex m_row;
 };
 
 #include "matrix_row.tpp"

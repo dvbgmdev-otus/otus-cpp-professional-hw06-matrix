@@ -7,8 +7,8 @@
 
 template <typename T, T DefaultValue>
 typename MatrixStorage<T, DefaultValue>::value_type MatrixStorage<T, DefaultValue>::get(
-    index_type row, index_type column) const {
-    const auto it = m_data.find(position_type(row, column));
+    MatrixIndex row, MatrixIndex column) const {
+    const auto it = m_data.find(MatrixPosition(row, column));
     if (it == m_data.end()) {
         return DefaultValue;
     }
@@ -17,10 +17,10 @@ typename MatrixStorage<T, DefaultValue>::value_type MatrixStorage<T, DefaultValu
 }
 
 template <typename T, T DefaultValue>
-void MatrixStorage<T, DefaultValue>::set(index_type row,
-                                         index_type column,
+void MatrixStorage<T, DefaultValue>::set(MatrixIndex row,
+                                         MatrixIndex column,
                                          const value_type& value) {
-    const position_type position(row, column);
+    const MatrixPosition position(row, column);
     if (value == DefaultValue) {
         m_data.erase(position);
         return;

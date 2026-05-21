@@ -6,7 +6,7 @@
 #endif  // MATRIX_H
 
 template <typename T, T DefaultValue>
-MatrixRow<T, DefaultValue> Matrix<T, DefaultValue>::operator[](index_type row) & {
+MatrixRow<T, DefaultValue> Matrix<T, DefaultValue>::operator[](MatrixIndex row) & {
     return MatrixRow<T, DefaultValue>(m_storage, row);
 }
 

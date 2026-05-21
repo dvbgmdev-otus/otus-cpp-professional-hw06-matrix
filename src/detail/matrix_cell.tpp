@@ -6,17 +6,11 @@
 #endif  // MATRIX_CELL_H
 
 template <typename T, T DefaultValue>
-MatrixCell<T, DefaultValue>::MatrixCell(storage_type& storage,
-                                        index_type row,
-                                        index_type column)
-    : m_storage(storage)
-    , m_row(row)
-    , m_column(column) {
-}
+MatrixCell<T, DefaultValue>::MatrixCell(storage_type& storage, MatrixIndex row, MatrixIndex column)
+    : m_storage(storage), m_row(row), m_column(column) {}
 
 template <typename T, T DefaultValue>
-MatrixCell<T, DefaultValue>& MatrixCell<T, DefaultValue>::operator=(
-    const value_type& value) {
+MatrixCell<T, DefaultValue>& MatrixCell<T, DefaultValue>::operator=(const value_type& value) {
     m_storage.set(m_row, m_column, value);
     return *this;
 }
