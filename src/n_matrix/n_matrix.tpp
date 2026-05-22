@@ -6,8 +6,10 @@
 #endif  // N_MATRIX_H
 
 template <typename T, T DefaultValue, std::size_t Dimension>
-NMatrixRow<T, DefaultValue, Dimension> NMatrix<T, DefaultValue, Dimension>::operator[](NMatrixIndex row) & {
-    return NMatrixRow<T, DefaultValue, Dimension>(m_storage, row);
+auto NMatrix<T, DefaultValue, Dimension>::operator[](NMatrixIndex index) & -> Slice {
+    NMatrixPosition<Dimension> position = {};
+    position[0] = index;
+    return Slice(m_storage, position);
 }
 
 template <typename T, T DefaultValue, std::size_t Dimension>

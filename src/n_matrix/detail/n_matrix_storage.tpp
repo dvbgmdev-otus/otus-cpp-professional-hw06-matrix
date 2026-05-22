@@ -6,7 +6,7 @@
 #endif  // N_MATRIX_STORAGE_H
 
 template <typename T, T DefaultValue, std::size_t Dimension>
-T NMatrixStorage<T, DefaultValue, Dimension>::get(NMatrixPosition<Dimension>& position) const {
+T NMatrixStorage<T, DefaultValue, Dimension>::get(const NMatrixPosition<Dimension>& position) const {
     const auto it = m_data.find(position);
     if (it == m_data.end()) {
         return DefaultValue;
@@ -16,7 +16,7 @@ T NMatrixStorage<T, DefaultValue, Dimension>::get(NMatrixPosition<Dimension>& po
 }
 
 template <typename T, T DefaultValue, std::size_t Dimension>
-void NMatrixStorage<T, DefaultValue, Dimension>::set(NMatrixPosition<Dimension>& position, const T& value) {
+void NMatrixStorage<T, DefaultValue, Dimension>::set(const NMatrixPosition<Dimension>& position, const T& value) {
     if (value == DefaultValue) {
         m_data.erase(position);
         return;

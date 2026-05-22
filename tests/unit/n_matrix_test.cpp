@@ -115,4 +115,20 @@ TEST(NMatrixThreeDimensionalTest, Indexing_WhenDimensionIs3_ThenThreeIndexesAreS
     EXPECT_TRUE((HasThreeDimensionalIndexing<NMatrix<int, 0, 3>>::value));
 }
 
+// 2.2 Запись по трем индексам должна сохранять значение в нужной ячейке.
+TEST(NMatrixThreeDimensionalTest, Assignment_WhenDimensionIs3_ThenValueIsStoredByThreeIndexes) {
+    NMatrix<int, 0, 3> matrix;
+
+    matrix[1][2][3] = 42;
+
+    EXPECT_EQ(matrix[1][2][3], 42);
+    EXPECT_EQ(matrix[1][2][4], 0);
+    EXPECT_EQ(matrix.size(), 1U);
+
+    matrix[1][2][3] = 0;
+
+    EXPECT_EQ(matrix[1][2][3], 0);
+    EXPECT_EQ(matrix.size(), 0U);
+}
+
 #endif  // Трехмерная индексация

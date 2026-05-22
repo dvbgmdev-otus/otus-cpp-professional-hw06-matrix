@@ -11,9 +11,9 @@ class NMatrixStorage {
 public:
     using Iterator = NMatrixIterator<T, Dimension>;
 
-    T get(NMatrixPosition<Dimension>& position) const;
+    T get(const NMatrixPosition<Dimension>& position) const;
 
-    void set(NMatrixPosition<Dimension>& position, const T& value);
+    void set(const NMatrixPosition<Dimension>& position, const T& value);
 
     std::size_t size() const;
 

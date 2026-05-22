@@ -7,8 +7,10 @@ template <typename T, T DefaultValue, std::size_t Dimension>
 class NMatrixCell {
 public:
     using Storage = NMatrixStorage<T, DefaultValue, Dimension>;
+    using Position = NMatrixPosition<Dimension>;
 
     NMatrixCell(Storage& storage, NMatrixIndex row, NMatrixIndex column);
+    NMatrixCell(Storage& storage, const Position& position);
 
     NMatrixCell& operator=(const T& value);
 
@@ -16,8 +18,7 @@ public:
 
 private:
     Storage& m_storage;
-    NMatrixIndex m_row;
-    NMatrixIndex m_column;
+    Position m_position;
 };
 
 #include "n_matrix_cell.tpp"
