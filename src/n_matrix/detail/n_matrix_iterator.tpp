@@ -6,8 +6,7 @@
 #endif  // N_MATRIX_ITERATOR_H
 
 template <typename T, std::size_t Dimension>
-NMatrixIterator<T, Dimension>::NMatrixIterator(StorageIterator iterator)
-    : m_iterator(iterator) {}
+NMatrixIterator<T, Dimension>::NMatrixIterator(StorageIterator iterator) : m_iterator(iterator) {}
 
 template <typename T, std::size_t Dimension>
 NMatrixIterator<T, Dimension>& NMatrixIterator<T, Dimension>::operator++() {
@@ -21,8 +20,14 @@ bool NMatrixIterator<T, Dimension>::operator!=(const NMatrixIterator& other) con
 }
 
 template <typename T, std::size_t Dimension>
-std::tuple<NMatrixIndex, NMatrixIndex, T> NMatrixIterator<T, Dimension>::operator*() const {
-    return std::make_tuple(m_iterator->first[0], m_iterator->first[1], m_iterator->second);
+auto NMatrixIterator<T, Dimension>::operator*() const -> ValueType {
+    return makeValue(std::make_index_sequence<Dimension>());
+}
+
+template <typename T, std::size_t Dimension>
+template <std::size_t... Indexes>
+auto NMatrixIterator<T, Dimension>::makeValue(std::index_sequence<Indexes...>) const -> ValueType {
+    return std::make_tuple(m_iterator->first[Indexes]..., m_iterator->second);
 }
 
 #endif  // N_MATRIX_ITERATOR_TPP

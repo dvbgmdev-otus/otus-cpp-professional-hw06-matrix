@@ -152,3 +152,33 @@ TEST(NMatrixThreeDimensionalTest, Iterator_WhenDimensionIs3_ThenReturnsThreeCoor
 }
 
 #endif  // Трехмерная индексация
+
+#if (1)  // 3. N-мерная индексация
+
+// 3.1 Итератор пятимерной матрицы должен возвращать все координаты и значение.
+TEST(NMatrixMultidimensionalTest, Iterator_WhenDimensionIs5_ThenReturnsAllCoordinatesAndValue) {
+    using Matrix = NMatrix<int, 0, 5>;
+    using ExpectedIteratorValue = std::tuple<NMatrixIndex, NMatrixIndex, NMatrixIndex, NMatrixIndex, NMatrixIndex, int>;
+
+    EXPECT_TRUE((HasIteratorValueType<Matrix, ExpectedIteratorValue>::value));
+
+    Matrix matrix;
+    matrix[1][2][3][4][5] = 42;
+
+    NMatrixIndex first = 0;
+    NMatrixIndex second = 0;
+    NMatrixIndex third = 0;
+    NMatrixIndex fourth = 0;
+    NMatrixIndex fifth = 0;
+    int value = 0;
+    std::tie(first, second, third, fourth, fifth, value) = *matrix.begin();
+
+    EXPECT_EQ(first, 1U);
+    EXPECT_EQ(second, 2U);
+    EXPECT_EQ(third, 3U);
+    EXPECT_EQ(fourth, 4U);
+    EXPECT_EQ(fifth, 5U);
+    EXPECT_EQ(value, 42);
+}
+
+#endif  // N-мерная индексация
