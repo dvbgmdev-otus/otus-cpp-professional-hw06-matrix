@@ -64,3 +64,17 @@ TEST_F(MatrixSelfCheckTest, Diagonals_WhenFilledByBracketIndexing_ThenOccupiedCe
 }
 
 #endif  // Самоконтроль
+
+#if (1)  // 3. Опциональные требования
+
+// 3.1 Цепочка присваиваний в одну ячейку.
+// 7. Опционально реализовать каноническую форму оператора =, допускающую выражения
+// ((matrix[100][100] = 314) = 0) = 217
+TEST_F(MatrixSelfCheckTest, CellAssignment_WhenChained_ThenLastValueIsStored) {
+    ((m_matrix[100][100] = 314) = 0) = 217;
+
+    EXPECT_EQ(m_matrix[100][100], 217);
+    EXPECT_EQ(m_matrix.size(), 1U);
+}
+
+#endif  // Опциональные требования
