@@ -1,10 +1,11 @@
 #ifndef N_MATRIX_TYPES_H
 #define N_MATRIX_TYPES_H
 
+#include <array>
 #include <cstddef>
-#include <utility>
 
 using NMatrixIndex = std::size_t;
-using NMatrixPosition = std::pair<NMatrixIndex, NMatrixIndex>;
+template <std::size_t Dimension>
+using NMatrixPosition = std::array<NMatrixIndex, Dimension>;
 
 #endif  // N_MATRIX_TYPES_H

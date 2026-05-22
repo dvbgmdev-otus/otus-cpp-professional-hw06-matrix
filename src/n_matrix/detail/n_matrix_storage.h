@@ -6,14 +6,14 @@
 #include "n_matrix_iterator.h"
 #include "n_matrix_types.h"
 
-template <typename T, T DefaultValue>
+template <typename T, T DefaultValue, std::size_t Dimension>
 class NMatrixStorage {
 public:
     using Iterator = NMatrixIterator<T>;
 
-    T get(NMatrixIndex row, NMatrixIndex column) const;
+    T get(NMatrixPosition<Dimension>& position) const;
 
-    void set(NMatrixIndex row, NMatrixIndex column, const T& value);
+    void set(NMatrixPosition<Dimension>& position, const T& value);
 
     std::size_t size() const;
 
@@ -22,7 +22,7 @@ public:
     Iterator end() const;
 
 private:
-    std::map<NMatrixPosition, T> m_data;
+    std::map<NMatrixPosition<Dimension>, T> m_data;
 };
 
 #include "n_matrix_storage.tpp"

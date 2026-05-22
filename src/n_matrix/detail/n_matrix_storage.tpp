@@ -5,9 +5,9 @@
 #include "n_matrix_storage.h"
 #endif  // N_MATRIX_STORAGE_H
 
-template <typename T, T DefaultValue>
-T NMatrixStorage<T, DefaultValue>::get(NMatrixIndex row, NMatrixIndex column) const {
-    const auto it = m_data.find(NMatrixPosition(row, column));
+template <typename T, T DefaultValue, std::size_t Dimension>
+T NMatrixStorage<T, DefaultValue, Dimension>::get(NMatrixPosition<Dimension>& position) const {
+    const auto it = m_data.find(position);
     if (it == m_data.end()) {
         return DefaultValue;
     }
@@ -15,9 +15,8 @@ T NMatrixStorage<T, DefaultValue>::get(NMatrixIndex row, NMatrixIndex column) co
     return it->second;
 }
 
-template <typename T, T DefaultValue>
-void NMatrixStorage<T, DefaultValue>::set(NMatrixIndex row, NMatrixIndex column, const T& value) {
-    const NMatrixPosition position(row, column);
+template <typename T, T DefaultValue, std::size_t Dimension>
+void NMatrixStorage<T, DefaultValue, Dimension>::set(NMatrixPosition<Dimension>& position, const T& value) {
     if (value == DefaultValue) {
         m_data.erase(position);
         return;
@@ -26,18 +25,18 @@ void NMatrixStorage<T, DefaultValue>::set(NMatrixIndex row, NMatrixIndex column,
     m_data[position] = value;
 }
 
-template <typename T, T DefaultValue>
-std::size_t NMatrixStorage<T, DefaultValue>::size() const {
+template <typename T, T DefaultValue, std::size_t Dimension>
+std::size_t NMatrixStorage<T, DefaultValue, Dimension>::size() const {
     return m_data.size();
 }
 
-template <typename T, T DefaultValue>
-auto NMatrixStorage<T, DefaultValue>::begin() const -> Iterator {
+template <typename T, T DefaultValue, std::size_t Dimension>
+auto NMatrixStorage<T, DefaultValue, Dimension>::begin() const -> Iterator {
     return Iterator(m_data.cbegin());
 }
 
-template <typename T, T DefaultValue>
-auto NMatrixStorage<T, DefaultValue>::end() const -> Iterator {
+template <typename T, T DefaultValue, std::size_t Dimension>
+auto NMatrixStorage<T, DefaultValue, Dimension>::end() const -> Iterator {
     return Iterator(m_data.cend());
 }
 
