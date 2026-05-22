@@ -36,7 +36,36 @@ main() {
     output="$("$BINARY")"
 
     local expected
-    expected="Application started"
+    expected="$(cat <<'EXPECTED'
+1 0 0 0 0 0 0 8
+0 2 0 0 0 0 7 0
+0 0 3 0 0 6 0 0
+0 0 0 4 5 0 0 0
+0 0 0 4 5 0 0 0
+0 0 3 0 0 6 0 0
+0 2 0 0 0 0 7 0
+1 0 0 0 0 0 0 8
+18
+Cell(0,9) = 9
+Cell(1,1) = 1
+Cell(1,8) = 8
+Cell(2,2) = 2
+Cell(2,7) = 7
+Cell(3,3) = 3
+Cell(3,6) = 6
+Cell(4,4) = 4
+Cell(4,5) = 5
+Cell(5,4) = 4
+Cell(5,5) = 5
+Cell(6,3) = 3
+Cell(6,6) = 6
+Cell(7,2) = 2
+Cell(7,7) = 7
+Cell(8,1) = 1
+Cell(8,8) = 8
+Cell(9,9) = 9
+EXPECTED
+)"
 
     check_output "full program output" "$expected" "$output"
 
