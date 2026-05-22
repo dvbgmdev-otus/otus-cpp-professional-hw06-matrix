@@ -45,6 +45,10 @@ add_unit_test(empty_test
     ${UNIT_TEST_DIR}/empty_test.cpp
 )
 
+add_unit_test(matrix_test
+    ${UNIT_TEST_DIR}/matrix_test.cpp
+)
+
 add_test(
     NAME self_check
     COMMAND ${UNIT_TEST_DIR}/self_check.sh $<TARGET_FILE:${PROJECT_NAME}>

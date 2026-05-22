@@ -1,0 +1,47 @@
+/**
+ * @file matrix_test.cpp
+ * @brief Unit-тесты поведения разреженной матрицы.
+ */
+
+#include "matrix.h"
+
+#include <gtest/gtest.h>
+
+#include <tuple>
+
+class MatrixExampleTest : public ::testing::Test {
+protected:
+    Matrix<int, -1> m_matrix;
+};
+
+#if (1)  // Пример из задания
+
+// 1. Чтение значения по умолчанию, запись ячейки и обход занятых ячеек.
+TEST_F(MatrixExampleTest, TaskExample_WhenCellAssigned_ThenOnlyAssignedCellIsOccupied) {
+    ASSERT_EQ(m_matrix.size(), 0U);
+
+    auto value = m_matrix[0][0];
+    EXPECT_EQ(value, -1);
+    EXPECT_EQ(m_matrix.size(), 0U);
+
+    m_matrix[100][100] = 314;
+    EXPECT_EQ(m_matrix[100][100], 314);
+    EXPECT_EQ(m_matrix.size(), 1U);
+
+    std::size_t count = 0;
+    for (auto cell : m_matrix) {
+        int row = 0;
+        int column = 0;
+        int cell_value = 0;
+        std::tie(row, column, cell_value) = cell;
+
+        EXPECT_EQ(row, 100);
+        EXPECT_EQ(column, 100);
+        EXPECT_EQ(cell_value, 314);
+        ++count;
+    }
+
+    EXPECT_EQ(count, 1U);
+}
+
+#endif  // Пример из задания
