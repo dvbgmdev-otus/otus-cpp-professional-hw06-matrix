@@ -7,8 +7,28 @@
 
 #include <gtest/gtest.h>
 
+#include <type_traits>
 #include <tuple>
+#include <utility>
 #include <vector>
+
+template <typename...>
+struct Void {
+    using Type = void;
+};
+
+template <typename... Args>
+using VoidT = typename Void<Args...>::Type;
+
+template <typename Matrix, typename = void>
+struct HasThreeDimensionalIndexing : std::false_type {
+};
+
+template <typename Matrix>
+struct HasThreeDimensionalIndexing<
+    Matrix,
+    VoidT<decltype(std::declval<Matrix&>()[0][0][0])>> : std::true_type {
+};
 
 class NMatrixApplicationScenarioTest : public ::testing::Test {
 protected:
@@ -87,3 +107,12 @@ TEST_F(NMatrixApplicationScenarioTest, MainScenario_WhenDiagonalsFilled_ThenMatr
 }
 
 #endif  // Сценарий приложения
+
+#if (1)  // 2. Трехмерная индексация
+
+// 2.1 Матрица размерности 3 должна поддерживать обращение matrix[x][y][z].
+TEST(NMatrixThreeDimensionalTest, Indexing_WhenDimensionIs3_ThenThreeIndexesAreSupported) {
+    EXPECT_TRUE((HasThreeDimensionalIndexing<NMatrix<int, 0, 3>>::value));
+}
+
+#endif  // Трехмерная индексация
