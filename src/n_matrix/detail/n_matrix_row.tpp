@@ -5,12 +5,12 @@
 #include "n_matrix_row.h"
 #endif  // N_MATRIX_ROW_H
 
-template <typename T, T DefaultValue>
-NMatrixRow<T, DefaultValue>::NMatrixRow(Storage& storage, NMatrixIndex row)
+template <typename T, T DefaultValue, std::size_t Dimension>
+NMatrixRow<T, DefaultValue, Dimension>::NMatrixRow(Storage& storage, NMatrixIndex row)
     : m_storage(storage), m_row(row) {}
 
-template <typename T, T DefaultValue>
-auto NMatrixRow<T, DefaultValue>::operator[](NMatrixIndex column) && -> Cell {
+template <typename T, T DefaultValue, std::size_t Dimension>
+auto NMatrixRow<T, DefaultValue, Dimension>::operator[](NMatrixIndex column) && -> Cell {
     return Cell(m_storage, m_row, column);
 }
 
