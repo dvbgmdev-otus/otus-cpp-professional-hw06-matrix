@@ -6,7 +6,7 @@
 #endif  // MATRIX_ITERATOR_H
 
 template <typename T>
-MatrixIterator<T>::MatrixIterator(StorageIterator iterator)
+MatrixIterator<T>::MatrixIterator(const StorageIterator& iterator)
     : m_iterator(iterator) {}
 
 template <typename T>

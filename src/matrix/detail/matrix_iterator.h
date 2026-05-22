@@ -11,7 +11,7 @@ class MatrixIterator {
 public:
     using StorageIterator = typename std::map<MatrixPosition, T>::const_iterator;
 
-    explicit MatrixIterator(StorageIterator iterator);
+    explicit MatrixIterator(const StorageIterator& iterator);
 
     MatrixIterator& operator++();
 
