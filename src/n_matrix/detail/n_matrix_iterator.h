@@ -25,7 +25,7 @@ public:
     using StorageIterator = typename std::map<NMatrixPosition<Dimension>, T>::const_iterator;
     using ValueType = typename ValueTypeBuilder<std::make_index_sequence<Dimension>>::Type;
 
-    explicit NMatrixIterator(StorageIterator iterator);
+    explicit NMatrixIterator(const StorageIterator& iterator);
 
     NMatrixIterator& operator++();
 

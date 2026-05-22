@@ -6,7 +6,7 @@
 #endif  // N_MATRIX_ITERATOR_H
 
 template <typename T, std::size_t Dimension>
-NMatrixIterator<T, Dimension>::NMatrixIterator(StorageIterator iterator) : m_iterator(iterator) {}
+NMatrixIterator<T, Dimension>::NMatrixIterator(const StorageIterator& iterator) : m_iterator(iterator) {}
 
 template <typename T, std::size_t Dimension>
 NMatrixIterator<T, Dimension>& NMatrixIterator<T, Dimension>::operator++() {
