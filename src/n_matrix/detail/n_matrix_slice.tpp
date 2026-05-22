@@ -6,6 +6,7 @@
 #endif  // N_MATRIX_SLICE_H
 
 template <typename T, T DefaultValue, std::size_t Dimension, std::size_t Depth, typename Enable>
+// cppcheck-suppress uninitMemberVar
 inline NMatrixSlice<T, DefaultValue, Dimension, Depth, Enable>::NMatrixSlice(
     Storage& storage,
     const Position& position)
