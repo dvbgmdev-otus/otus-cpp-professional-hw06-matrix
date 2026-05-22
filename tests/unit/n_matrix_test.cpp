@@ -30,6 +30,18 @@ struct HasThreeDimensionalIndexing<
     VoidT<decltype(std::declval<Matrix&>()[0][0][0])>> : std::true_type {
 };
 
+template <typename Matrix, typename Expected, typename = void>
+struct HasIteratorValueType : std::false_type {
+};
+
+template <typename Matrix, typename Expected>
+struct HasIteratorValueType<
+    Matrix,
+    Expected,
+    VoidT<decltype(*std::declval<const Matrix&>().begin())>>
+    : std::is_same<decltype(*std::declval<const Matrix&>().begin()), Expected> {
+};
+
 class NMatrixApplicationScenarioTest : public ::testing::Test {
 protected:
     NMatrix<int, 0> m_matrix;
@@ -129,6 +141,14 @@ TEST(NMatrixThreeDimensionalTest, Assignment_WhenDimensionIs3_ThenValueIsStoredB
 
     EXPECT_EQ(matrix[1][2][3], 0);
     EXPECT_EQ(matrix.size(), 0U);
+}
+
+// 2.3 Итератор трехмерной матрицы должен возвращать три координаты и значение.
+TEST(NMatrixThreeDimensionalTest, Iterator_WhenDimensionIs3_ThenReturnsThreeCoordinatesAndValue) {
+    using Matrix = NMatrix<int, 0, 3>;
+    using ExpectedIteratorValue = std::tuple<NMatrixIndex, NMatrixIndex, NMatrixIndex, int>;
+
+    EXPECT_TRUE((HasIteratorValueType<Matrix, ExpectedIteratorValue>::value));
 }
 
 #endif  // Трехмерная индексация
