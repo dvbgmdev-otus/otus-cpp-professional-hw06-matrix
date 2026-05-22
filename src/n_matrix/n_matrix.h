@@ -4,12 +4,12 @@
 #include "n_matrix_row.h"
 #include "n_matrix_storage.h"
 
-template <typename T, T DefaultValue>
+template <typename T, T DefaultValue, std::size_t Dimension = 2>
 class NMatrix {
 public:
-    using Iterator = typename NMatrixStorage<T, DefaultValue>::Iterator;
+    using Iterator = typename NMatrixStorage<T, DefaultValue, Dimension>::Iterator;
 
-    NMatrixRow<T, DefaultValue> operator[](NMatrixIndex row) &;
+    NMatrixRow<T, DefaultValue, Dimension> operator[](NMatrixIndex row) &;
 
     std::size_t size() const;
 
@@ -18,7 +18,7 @@ public:
     Iterator end() const;
 
 private:
-    NMatrixStorage<T, DefaultValue> m_storage;
+    NMatrixStorage<T, DefaultValue, Dimension> m_storage;
 };
 
 #include "n_matrix.tpp"
