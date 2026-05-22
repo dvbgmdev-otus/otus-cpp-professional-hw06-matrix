@@ -3,10 +3,10 @@
 
 #include "n_matrix_storage.h"
 
-template <typename T, T DefaultValue>
+template <typename T, T DefaultValue, std::size_t Dimension>
 class NMatrixCell {
 public:
-    using Storage = NMatrixStorage<T, DefaultValue>;
+    using Storage = NMatrixStorage<T, DefaultValue, Dimension>;
 
     NMatrixCell(Storage& storage, NMatrixIndex row, NMatrixIndex column);
 
