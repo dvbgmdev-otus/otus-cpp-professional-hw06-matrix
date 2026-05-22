@@ -6,10 +6,10 @@
 
 #include "n_matrix_types.h"
 
-template <typename T>
+template <typename T, std::size_t Dimension>
 class NMatrixIterator {
 public:
-    using StorageIterator = typename std::map<NMatrixPosition, T>::const_iterator;
+    using StorageIterator = typename std::map<NMatrixPosition<Dimension>, T>::const_iterator;
 
     explicit NMatrixIterator(StorageIterator iterator);
 

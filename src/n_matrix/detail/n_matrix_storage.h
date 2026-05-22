@@ -9,7 +9,7 @@
 template <typename T, T DefaultValue, std::size_t Dimension>
 class NMatrixStorage {
 public:
-    using Iterator = NMatrixIterator<T>;
+    using Iterator = NMatrixIterator<T, Dimension>;
 
     T get(NMatrixPosition<Dimension>& position) const;
 
