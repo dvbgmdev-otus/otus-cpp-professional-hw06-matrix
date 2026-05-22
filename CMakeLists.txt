@@ -17,6 +17,8 @@ if(1) # PROJECT CONFIG BLOCK
         ${SRC_DIR}
         ${SRC_DIR}/matrix
         ${SRC_DIR}/matrix/detail
+        ${SRC_DIR}/n_matrix
+        ${SRC_DIR}/n_matrix/detail
     )
 
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
