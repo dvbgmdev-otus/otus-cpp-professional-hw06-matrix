@@ -34,8 +34,8 @@ int main() {
 
     // 5. Вывести все занятые ячейки вместе со своими позициями.
     for (auto cell : matrix) {
-        int row = 0;
-        int column = 0;
+        MatrixIndex row = 0;
+        MatrixIndex column = 0;
         int cell_value = 0;
         std::tie(row, column, cell_value) = cell;
 
