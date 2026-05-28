@@ -20,6 +20,10 @@ endif()
 
 # ---- Покрытие кода возможно только при включённых тестах ----
 if(BUILD_COVERAGE)
+    if(MSVC)
+        message(FATAL_ERROR "BUILD_COVERAGE is not supported with MSVC")
+    endif()
+
     set(BUILD_TESTING ON CACHE BOOL "Build unit tests" FORCE)
     set(COVERAGE_COMPILE_FLAGS "--coverage;-O0;-g")
     set(COVERAGE_LINK_FLAGS "--coverage")

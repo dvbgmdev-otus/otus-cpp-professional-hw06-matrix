@@ -29,6 +29,9 @@ include(FetchContent)
 
 set(BUILD_GMOCK OFF)
 set(INSTALL_GTEST OFF)
+if(MSVC)
+    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+endif()
 
 FetchContent_Declare(
     googletest
@@ -53,10 +56,14 @@ add_unit_test(n_matrix_test
     ${UNIT_TEST_DIR}/n_matrix_test.cpp
 )
 
-add_test(
-    NAME self_check
-    COMMAND ${UNIT_TEST_DIR}/self_check.sh $<TARGET_FILE:${PROJECT_NAME}>
-)
+if(WIN32)
+    message(STATUS "  self_check disabled on Windows: requires bash")
+else()
+    add_test(
+        NAME self_check
+        COMMAND ${UNIT_TEST_DIR}/self_check.sh $<TARGET_FILE:${PROJECT_NAME}>
+    )
+endif()
 
 message(STATUS "  GoogleTest added")
 

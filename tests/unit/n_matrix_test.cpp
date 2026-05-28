@@ -85,8 +85,8 @@ TEST_F(NMatrixApplicationScenarioTest, MainScenario_WhenDiagonalsFilled_ThenMatr
     // 5 Сбор всех занятых ячеек вместе с позициями.
     std::vector<std::tuple<int, int, int>> occupied_cells;
     for (auto cell : m_matrix) {
-        int row = 0;
-        int column = 0;
+        NMatrixIndex row = 0;
+        NMatrixIndex column = 0;
         int cell_value = 0;
         std::tie(row, column, cell_value) = cell;
 

@@ -35,8 +35,8 @@ TEST_F(MatrixExampleTest, TaskExample_WhenCellAssigned_ThenOnlyAssignedCellIsOcc
 
     std::size_t count = 0;
     for (auto cell : m_matrix) {
-        int row = 0;
-        int column = 0;
+        MatrixIndex row = 0;
+        MatrixIndex column = 0;
         int cell_value = 0;
         std::tie(row, column, cell_value) = cell;
 

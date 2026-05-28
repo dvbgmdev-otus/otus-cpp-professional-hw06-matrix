@@ -13,7 +13,12 @@
 #include "n_matrix_storage.h"
 #include "n_matrix_types.h"
 
-template <typename T, T DefaultValue, std::size_t Dimension, std::size_t Depth, typename Enable = void>
+template <
+    typename T,
+    T DefaultValue,
+    std::size_t Dimension,
+    std::size_t Depth,
+    bool IsLast = (Depth + 1 == Dimension)>
 class NMatrixSlice;
 
 /**
@@ -29,9 +34,9 @@ class NMatrixSlice;
  * @tparam DefaultValue Значение свободной ячейки.
  * @tparam Dimension Количество измерений матрицы.
  * @tparam Depth Текущая глубина индексирования.
- * @tparam Enable Технический параметр для выбора специализации.
+ * @tparam IsLast Технический параметр для выбора специализации.
  */
-template <typename T, T DefaultValue, std::size_t Dimension, std::size_t Depth, typename Enable>
+template <typename T, T DefaultValue, std::size_t Dimension, std::size_t Depth, bool IsLast>
 class NMatrixSlice {
 public:
     /** @brief Тип хранилища занятых ячеек. */
@@ -75,13 +80,13 @@ private:
  * @tparam Dimension Количество измерений матрицы.
  */
 /** @cond */
-template <typename T, T DefaultValue, std::size_t Dimension>
+template <typename T, T DefaultValue, std::size_t Dimension, std::size_t Depth>
 class NMatrixSlice<
     T,
     DefaultValue,
     Dimension,
-    Dimension - 1,
-    typename std::enable_if<(Dimension > 1)>::type> {
+    Depth,
+    true> {
 public:
     /** @brief Тип хранилища занятых ячеек. */
     using Storage = NMatrixStorage<T, DefaultValue, Dimension>;
