@@ -44,7 +44,7 @@ struct HasIteratorValueType<
 
 class NMatrixApplicationScenarioTest : public ::testing::Test {
 protected:
-    NMatrix<int, 0> m_matrix;
+    NMatrix<int> m_matrix;
 };
 
 #if (1)  // 1. Сценарий приложения
@@ -84,13 +84,11 @@ TEST_F(NMatrixApplicationScenarioTest, MainScenario_WhenDiagonalsFilled_ThenMatr
 
     // 5 Сбор всех занятых ячеек вместе с позициями.
     std::vector<std::tuple<int, int, int>> occupied_cells;
-    for (auto cell : m_matrix) {
-        NMatrixIndex row = 0;
-        NMatrixIndex column = 0;
-        int cell_value = 0;
-        std::tie(row, column, cell_value) = cell;
+    for (const auto& cell : m_matrix) {
+        const auto& position = cell.first;
+        const auto& cell_value = cell.second;
 
-        occupied_cells.push_back(std::make_tuple(row, column, cell_value));
+        occupied_cells.push_back(std::make_tuple(position[0], position[1], cell_value));
     }
 
     // 6 Проверка списка занятых ячеек.
@@ -143,10 +141,10 @@ TEST(NMatrixThreeDimensionalTest, Assignment_WhenDimensionIs3_ThenValueIsStoredB
     EXPECT_EQ(matrix.size(), 0U);
 }
 
-// 2.3 Итератор трехмерной матрицы должен возвращать три координаты и значение.
-TEST(NMatrixThreeDimensionalTest, Iterator_WhenDimensionIs3_ThenReturnsThreeCoordinatesAndValue) {
+// 2.3 Итератор трехмерной матрицы должен возвращать позицию и значение.
+TEST(NMatrixThreeDimensionalTest, Iterator_WhenDimensionIs3_ThenReturnsPositionAndValue) {
     using Matrix = NMatrix<int, 0, 3>;
-    using ExpectedIteratorValue = std::tuple<NMatrixIndex, NMatrixIndex, NMatrixIndex, int>;
+    using ExpectedIteratorValue = typename Matrix::Iterator::Reference;
 
     EXPECT_TRUE((HasIteratorValueType<Matrix, ExpectedIteratorValue>::value));
 }
@@ -155,29 +153,25 @@ TEST(NMatrixThreeDimensionalTest, Iterator_WhenDimensionIs3_ThenReturnsThreeCoor
 
 #if (1)  // 3. N-мерная индексация
 
-// 3.1 Итератор пятимерной матрицы должен возвращать все координаты и значение.
-TEST(NMatrixMultidimensionalTest, Iterator_WhenDimensionIs5_ThenReturnsAllCoordinatesAndValue) {
+// 3.1 Итератор пятимерной матрицы должен возвращать позицию и значение.
+TEST(NMatrixMultidimensionalTest, Iterator_WhenDimensionIs5_ThenReturnsPositionAndValue) {
     using Matrix = NMatrix<int, 0, 5>;
-    using ExpectedIteratorValue = std::tuple<NMatrixIndex, NMatrixIndex, NMatrixIndex, NMatrixIndex, NMatrixIndex, int>;
+    using ExpectedIteratorValue = typename Matrix::Iterator::Reference;
 
     EXPECT_TRUE((HasIteratorValueType<Matrix, ExpectedIteratorValue>::value));
 
     Matrix matrix;
     matrix[1][2][3][4][5] = 42;
 
-    NMatrixIndex first = 0;
-    NMatrixIndex second = 0;
-    NMatrixIndex third = 0;
-    NMatrixIndex fourth = 0;
-    NMatrixIndex fifth = 0;
-    int value = 0;
-    std::tie(first, second, third, fourth, fifth, value) = *matrix.begin();
+    const auto& cell = *matrix.begin();
+    const auto& position = cell.first;
+    const auto& value = cell.second;
 
-    EXPECT_EQ(first, 1U);
-    EXPECT_EQ(second, 2U);
-    EXPECT_EQ(third, 3U);
-    EXPECT_EQ(fourth, 4U);
-    EXPECT_EQ(fifth, 5U);
+    EXPECT_EQ(position[0], 1U);
+    EXPECT_EQ(position[1], 2U);
+    EXPECT_EQ(position[2], 3U);
+    EXPECT_EQ(position[3], 4U);
+    EXPECT_EQ(position[4], 5U);
     EXPECT_EQ(value, 42);
 }
 

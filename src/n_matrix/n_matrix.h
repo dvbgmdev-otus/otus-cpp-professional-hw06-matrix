@@ -29,7 +29,7 @@
  * @tparam DefaultValue Значение свободной ячейки.
  * @tparam Dimension Количество измерений матрицы.
  */
-template <typename T, T DefaultValue, std::size_t Dimension = 2>
+template <typename T, T DefaultValue = T{}, std::size_t Dimension = 2>
 class NMatrix {
 public:
     /** @brief Итератор по занятым ячейкам матрицы. */

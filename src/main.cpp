@@ -1,12 +1,11 @@
 #include <iostream>
-#include <tuple>
 
 #include "matrix.h"
 
 int main() {
     // 1. При запуске программы необходимо создать матрицу с пустым значением 0, заполнить главную
     // диагональ матрицы (от [0,0] до [9,9]) значениями от 0 до 9.
-    Matrix<int, 0> matrix;
+    Matrix<int> matrix;
     for (MatrixIndex i = 0; i < 10; ++i) {
         matrix[i][i] = static_cast<int>(i);
     }
@@ -33,13 +32,11 @@ int main() {
     std::cout << matrix.size() << '\n';
 
     // 5. Вывести все занятые ячейки вместе со своими позициями.
-    for (auto cell : matrix) {
-        MatrixIndex row = 0;
-        MatrixIndex column = 0;
-        int cell_value = 0;
-        std::tie(row, column, cell_value) = cell;
+    for (const auto& cell : matrix) {
+        const auto& position = cell.first;
+        const auto& cell_value = cell.second;
 
-        std::cout << "Cell(" << row << "," << column << ") = " << cell_value << '\n';
+        std::cout << "Cell(" << position.first << "," << position.second << ") = " << cell_value << '\n';
     }
 
     return 0;

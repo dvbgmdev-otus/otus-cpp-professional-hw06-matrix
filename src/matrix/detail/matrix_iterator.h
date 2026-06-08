@@ -7,17 +7,15 @@
  */
 
 #include <map>
-#include <tuple>
-
 #include "matrix_types.h"
 
 /**
  * @class MatrixIterator
  * @ingroup matrix_detail
- * @brief Итератор, возвращающий координаты и значение занятой ячейки Matrix.
+ * @brief Итератор по занятым ячейкам Matrix.
  *
  * MatrixIterator оборачивает const_iterator внутреннего std::map-хранилища и
- * при разыменовании возвращает tuple вида (row, column, value).
+ * при разыменовании возвращает ссылку на пару (position, value).
  *
  * @tparam T Тип значения ячейки.
  */
@@ -26,6 +24,8 @@ class MatrixIterator {
 public:
     /** @brief Тип итератора внутреннего контейнера хранения. */
     using StorageIterator = typename std::map<MatrixPosition, T>::const_iterator;
+    /** @brief Тип ссылки на занятую ячейку внутреннего контейнера. */
+    using Reference = typename StorageIterator::reference;
 
     /**
      * @brief Создаёт итератор из итератора внутреннего контейнера.
@@ -47,10 +47,10 @@ public:
     bool operator!=(const MatrixIterator& other) const;
 
     /**
-     * @brief Возвращает координаты и значение текущей занятой ячейки.
-     * @return Кортеж (row, column, value).
+     * @brief Возвращает позицию и значение текущей занятой ячейки.
+     * @return Ссылка на пару (position, value).
      */
-    std::tuple<MatrixIndex, MatrixIndex, T> operator*() const;
+    Reference operator*() const;
 
 private:
     /** @brief Итератор внутреннего контейнера хранения. */
