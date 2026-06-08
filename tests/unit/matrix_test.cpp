@@ -16,7 +16,7 @@ protected:
 
 class MatrixSelfCheckTest : public ::testing::Test {
 protected:
-    Matrix<int, 0> m_matrix;
+    Matrix<int> m_matrix;
 };
 
 #if (1)  // 1. Пример из задания
@@ -51,9 +51,21 @@ TEST_F(MatrixExampleTest, TaskExample_WhenCellAssigned_ThenOnlyAssignedCellIsOcc
 
 #endif
 
-#if (1)  // 2.Самоконтроль
+#if (1)  // 2. Значение свободной ячейки
 
-// 2.1 Индексация оператором [] и количество занятых ячеек после заполнения диагоналей.
+// 2.1 Матрица с явно заданным значением свободной ячейки должна возвращать его при чтении пустой ячейки.
+TEST(MatrixDefaultValueTest, EmptyCell_WhenCustomDefaultValueIsSet_ThenReturnsCustomDefaultValue) {
+    Matrix<int, -1> matrix;
+
+    EXPECT_EQ(matrix[0][0], -1);
+    EXPECT_EQ(matrix.size(), 0U);
+}
+
+#endif  // Значение свободной ячейки
+
+#if (1)  // 3.Самоконтроль
+
+// 3.1 Индексация оператором [] и количество занятых ячеек после заполнения диагоналей.
 TEST_F(MatrixSelfCheckTest, Diagonals_WhenFilledByBracketIndexing_ThenOccupiedCellCountIs18) {
     for (MatrixIndex i = 0; i < 10; ++i) {
         m_matrix[i][i] = static_cast<int>(i);
@@ -65,9 +77,9 @@ TEST_F(MatrixSelfCheckTest, Diagonals_WhenFilledByBracketIndexing_ThenOccupiedCe
 
 #endif  // Самоконтроль
 
-#if (1)  // 3. Опциональные требования
+#if (1)  // 4. Опциональные требования
 
-// 3.1 Цепочка присваиваний в одну ячейку.
+// 4.1 Цепочка присваиваний в одну ячейку.
 // 7. Опционально реализовать каноническую форму оператора =, допускающую выражения
 // ((matrix[100][100] = 314) = 0) = 217
 TEST_F(MatrixSelfCheckTest, CellAssignment_WhenChained_ThenLastValueIsStored) {

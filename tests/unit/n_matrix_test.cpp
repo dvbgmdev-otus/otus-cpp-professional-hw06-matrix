@@ -44,7 +44,7 @@ struct HasIteratorValueType<
 
 class NMatrixApplicationScenarioTest : public ::testing::Test {
 protected:
-    NMatrix<int, 0> m_matrix;
+    NMatrix<int> m_matrix;
 };
 
 #if (1)  // 1. Сценарий приложения

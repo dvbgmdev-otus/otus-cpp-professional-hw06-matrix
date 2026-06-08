@@ -10,7 +10,7 @@
  *  чтобы сохранить простой учебный интерфейс из условия задания:
  *
  *  @code{.cpp}
- *  Matrix<int, 0> matrix;
+ *  Matrix<int> matrix;
  *  NMatrix<int, 0, 3> cube;
  *  @endcode
  *

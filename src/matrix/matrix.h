@@ -21,7 +21,7 @@
  * @tparam T Тип значения ячейки.
  * @tparam DefaultValue Значение свободной ячейки.
  */
-template <typename T, T DefaultValue>
+template <typename T, T DefaultValue = T{}>
 class Matrix {
 public:
     /** @brief Итератор по занятым ячейкам матрицы. */

@@ -20,7 +20,7 @@
  *
  *  - индексирование через operator[]:
  *    @code{.cpp}
- *    Matrix<int, 0> matrix;
+ *    Matrix<int> matrix;
  *    matrix[1][2] = 42;
  *    @endcode
  *
