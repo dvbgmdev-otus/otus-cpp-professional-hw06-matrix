@@ -21,8 +21,8 @@ bool MatrixIterator<T>::operator!=(const MatrixIterator& other) const {
 }
 
 template <typename T>
-std::tuple<MatrixIndex, MatrixIndex, T> MatrixIterator<T>::operator*() const {
-    return std::make_tuple(m_iterator->first.first, m_iterator->first.second, m_iterator->second);
+auto MatrixIterator<T>::operator*() const -> Reference {
+    return *m_iterator;
 }
 
 #endif  // MATRIX_ITERATOR_TPP

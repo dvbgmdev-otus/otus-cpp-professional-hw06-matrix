@@ -7,8 +7,6 @@
 
 #include <gtest/gtest.h>
 
-#include <tuple>
-
 class MatrixExampleTest : public ::testing::Test {
 protected:
     Matrix<int, -1> m_matrix;
@@ -34,14 +32,12 @@ TEST_F(MatrixExampleTest, TaskExample_WhenCellAssigned_ThenOnlyAssignedCellIsOcc
     EXPECT_EQ(m_matrix.size(), 1U);
 
     std::size_t count = 0;
-    for (auto cell : m_matrix) {
-        MatrixIndex row = 0;
-        MatrixIndex column = 0;
-        int cell_value = 0;
-        std::tie(row, column, cell_value) = cell;
+    for (const auto& cell : m_matrix) {
+        const auto& position = cell.first;
+        const auto& cell_value = cell.second;
 
-        EXPECT_EQ(row, 100);
-        EXPECT_EQ(column, 100);
+        EXPECT_EQ(position.first, 100);
+        EXPECT_EQ(position.second, 100);
         EXPECT_EQ(cell_value, 314);
         ++count;
     }

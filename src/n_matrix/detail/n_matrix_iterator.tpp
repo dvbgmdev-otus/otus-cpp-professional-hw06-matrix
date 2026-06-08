@@ -20,14 +20,8 @@ bool NMatrixIterator<T, Dimension>::operator!=(const NMatrixIterator& other) con
 }
 
 template <typename T, std::size_t Dimension>
-auto NMatrixIterator<T, Dimension>::operator*() const -> ValueType {
-    return makeValue(std::make_index_sequence<Dimension>());
-}
-
-template <typename T, std::size_t Dimension>
-template <std::size_t... Indexes>
-auto NMatrixIterator<T, Dimension>::makeValue(std::index_sequence<Indexes...>) const -> ValueType {
-    return std::make_tuple(m_iterator->first[Indexes]..., m_iterator->second);
+auto NMatrixIterator<T, Dimension>::operator*() const -> Reference {
+    return *m_iterator;
 }
 
 #endif  // N_MATRIX_ITERATOR_TPP
